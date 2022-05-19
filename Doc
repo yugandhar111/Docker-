@@ -1,0 +1,137 @@
+Images and Containers
+=========================
+A docker image is a combination of bin and lib which are required for a specific process.
+
+A container is a running instance of an image.Any no of
+containers can be created from a single  docker image
+
+
+Docker Components
+==================
+1 Docker client
+2 Docker deamon
+3 Docker Registry
+
+Docker client is responsible for accepting the docker commands
+and send them to the docker deamon.
+
+Docker deamon will be running on the docker host and it will execute the docker commands.It will send the command requests to
+the docker images and docker containers already present in our
+host machine or it will send the command request to docker images which are present in the docker registry
+
+Docker registry is the cloud site of docker where different docker images are present.(hub.docker.com)
+we can create our own private registry and save docker images which acan be exclusively used by only our orginzation
+
+Docker info commands
+1 to find the version of docker 
+  docker --version
+
+2 to find complete info of docker
+   docker info
+
+3 to find info about syntax of docker commands
+  docker help
+
+Downlaoding docker images
+1 to docwnload an image
+  docker pull image_name
+
+2 docker run image_name
+  (run will downlaod the image and also start it as a container
+   wheras pull will only download the iamge)
+
+3 to build a dockerimage from a docker file
+  docker build -t tagname path_of_docker_file
+
+4 To see the image downlaod into our host machine
+  docker images
+
+5 To remove an image from our host machine
+  docker rmi image_name
+
+6 To upload a docker image
+  docker login
+  docker push image_name
+
+7 To rename a local docker image
+  docker tag original_imagename new_iamgename
+
+
+Run command
+==================
+This command is used for starting an image as a container.
+It can also downlaod an image if it is not present in out 
+docker host
+Syntax: docker run imagename
+
+Run command options
+---------------------
+ -rm this used to remove a container once we exit from it
+ -it this is used to open the shell or interactive termianl
+     in tha container where we can file linux commands
+ --name this is used to give a customised name to our container
+ -p This is used for port mapping.The port no on left side of :     is called external port and port no on right of : is called      internal port no(eg -p 3308:3306)
+ -v This is used for attaching volumes
+  -P This is used to publish the port number of a docker      container
+  -e this used to pass environment variables
+  -a used to attach stndin and stdout
+
+To see the list of all running containers
+docker container ls
+
+To see list of all contianer(running and stopped)
+docker ps -a
+
+to stop a container
+docker stop containername/contaierid
+
+To remove a container
+docker rm containername/containerid
+
+To directly remove a running container without stopping it
+docker rm -f containername/containerid
+
+
+To stop all the running containers
+docker stop $(docker ps -aq)
+
+To remove all stopped containers
+docker rm  $(docker ps -aq)
+
+To remove all running containers
+docker rm -f $(docker ps -aq)
+
+To restart a container
+docker restart containername/containerid
+
+To restart a container after 20 seconds
+docker restart -t 20 containername/containerid
+
+
+To find the lsit of all docker networks
+docker network ls
+
+To find complete info about a network
+docker network inspect networkname/networkid
+
+To find complete info about a container
+docker network inspect containername/containerid
+
+To create a new network
+docker network create networkname
+
+To remove a network
+docker network rm networkname/networkid
+
+To connect to a network
+docker network connect networkid/networkname containerid/containername
+
+To disconnect to a network
+docker network disconnect networkid/networkname  containerid/containername
+
+To display logs of a container
+docker logs containername/contaierid
+
+
+To display last 100logs of a container
+docker logs -tail 100 containername/contaierid 
